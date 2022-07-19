@@ -13,6 +13,4 @@ go.work
 postgres-data/
 Dockerfile
 db-data/
-go.mod
-go.sum
 .vscode/

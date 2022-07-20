@@ -1,7 +1,5 @@
-# name of the test
 name: ci-test
 
-# how and what we trigger to run the test
 on:
   push:
     branches: [ "main" ]
@@ -13,7 +11,6 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-# DB service linked with the workflow
     services:
       postgres:
         image: postgres:12
@@ -39,16 +36,14 @@ jobs:
     - name: Check out code into Go module directory   
       uses: actions/checkout@v3
 
-# install migrate CLI
     - name: Install Golang migrate
       run: |
         curl -L https://github.com/golang-migrate/migrate/releases/download/v4.15.2/migrate.linux-386.tar.gz | tar xvz 
-# move the binary file to /usr/bin/ folder 
         sudo mv migrate /usr/bin/ 
         which migrate
-# migrate the DB schema to the newly launched container
+
     - name: Do DB migration   
       run: make migrateup
-# launch the test
+
     - name: Test
       run: make test

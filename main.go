@@ -3,22 +3,25 @@ package main
 import (
 	"database/sql"
 	"log"
-	db "simplebank/db/sqlc"
 	"simplebank/api"
-	_"github.com/lib/pq"
+	db "simplebank/db/sqlc"
+
+	_ "github.com/lib/pq"
+	"simplebank/util"
 )
 
-const dbDriver = "postgres"
-const dbSource = "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable"
-const serverAddress = "0.0.0.0:8080"
-
 func main() {
-	conn, err := sql.Open(dbDriver, dbSource)
-	if err != nil {
-		log.Fatal("Error while opening db:", err)
+
+	config, err1 := util.LoadEnvVars(".")
+	if err1 != nil {
+		log.Fatal("Error while loading env variables:", err1.Error())
+	}
+	conn, err2 := sql.Open(config.DBDriver, config.DBSource)
+	if err2 != nil {
+		log.Fatal("Error while opening db: ", err2.Error())
 	}
 
 	store := db.NewStore(conn)
 	server := api.NewServer(store)
-	server.Start(serverAddress)
+	server.Start(config.ServerAddress)
 }

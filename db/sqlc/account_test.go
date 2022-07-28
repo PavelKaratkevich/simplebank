@@ -12,8 +12,10 @@ import (
 
 // create random account which will be used by other unit tests
 func CreateRandomAccount(t *testing.T) Account {
+	user := CreateRandomUser(t)
+
 	arg := CreateAccountParams{
-		Owner: util.RandomOwner(),
+		Owner: user.Username,
 		Balance: util.RandomMoney(),
 		Currency: util.RandomCurrency(),		
 	}

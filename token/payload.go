@@ -18,6 +18,7 @@ type Payload struct {
 }
 
 func NewPayload(username string, duration time.Duration) (*Payload, error) {
+	// create unique token ID
 	tokenID, err := uuid.NewRandom()
 	if err != nil {
 		return nil, err

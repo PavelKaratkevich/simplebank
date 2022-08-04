@@ -11,6 +11,5 @@ vendor/
 go.work
 .idea
 postgres-data/
-Dockerfile
 db-data/
 .vscode/

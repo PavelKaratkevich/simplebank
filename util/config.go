@@ -26,7 +26,7 @@ func LoadEnvVars(path string) (config Config, err error) {
 		panic(fmt.Errorf("fatal error config file: %w", err))
 	}
 
-	// viper.AutomaticEnv() // allows to overwrite env variable from command line
+	viper.AutomaticEnv() // allows to overwrite env variable from command line
 
 	err = viper.Unmarshal(&config)
 	if err != nil {

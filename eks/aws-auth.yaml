@@ -9,3 +9,6 @@ data:
       - system:masters
       userarn: arn:aws:iam::565869887733:user/github-ci
       username: github-ci
+      - system:masters
+      userarn: arn:aws:iam::565869887733:role/ECR_access_role
+      username: ECR_access_role

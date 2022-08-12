@@ -47,10 +47,11 @@ jobs:
         docker push -a $REGISTRY/$REPOSITORY
     
     - name: Update kube config
-      run: aws eks update-kubeconfig --name simple-bank --region us-east-1
+      run: |
+        aws sts get-caller-identity
+        aws eks update-kubeconfig --name simple-bank --region us-east-1 --role-arn arn:aws:iam::565869887733:role/ECR_access_role
 
     - name: Deploy image to Amazon EKS 
       run: |
-        kubectl apply -f ./eks/aws-auth.yaml
         kubectl apply -f ./eks/deployment.yaml
         kubectl apply -f ./eks/service.yaml

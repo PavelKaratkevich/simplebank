@@ -5,11 +5,10 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: arn:aws:iam::565869887733:role/ECR_access_role
-      username: system:node:{{EC2PrivateDNSName}}
-      groups:
-        - system:bootstrappers
-        - system:nodes
+    - groups:
+      - system:masters
+      rolearn: arn:aws:iam::565869887733:role/ECR_access_role
+      rolename: role-to-assume
   mapUsers: |
     - groups:
       - system:masters

@@ -4,11 +4,6 @@ metadata:
   name: aws-auth
   namespace: kube-system
 data:
-  mapRoles: |
-    - groups:
-      - system:masters
-      rolearn: arn:aws:iam::565869887733:role/ECR_access_role
-      rolename: role-to-assume
   mapUsers: |
     - groups:
       - system:masters

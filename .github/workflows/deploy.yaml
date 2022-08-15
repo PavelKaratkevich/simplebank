@@ -47,6 +47,7 @@ jobs:
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REPOSITORY:latest .
         docker push -a $REGISTRY/$REPOSITORY
     
+    # we connect the app with the EKS cluster
     - name: Update kube config
       run: |
         aws sts get-caller-identity
